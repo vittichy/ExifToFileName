@@ -1,0 +1,70 @@
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Debug\ResolveAssemblyReference.cache
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmMain.resources
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.Properties.Resources.resources
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.UCtrlSelectPath.resources
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.csproj.GenerateResource.Cache
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.exe
+D:\vtprg\cs\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.exe
+D:\vtprg\cs\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.pdb
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.pdb
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.exe
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.pdb
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmBGProcess.resources
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmMain.resources
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.Properties.Resources.resources
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.UCtrlSelectPath.resources
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.csproj.GenerateResource.Cache
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.exe
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.pdb
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmErrorLog.resources
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.exe
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.pdb
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.exe
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.pdb
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmBGProcess.resources
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmErrorLog.resources
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmMain.resources
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.Properties.Resources.resources
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.UCtrlSelectPath.resources
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.exe.config
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\tichy\Documents\Visual Studio 2010\Projects\!test\ExifToFileName\ExifToFileName\obj\Debug\GenerateResource.write.1.tlog
+C:\src\!vt\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.exe.config
+C:\src\!vt\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.exe
+C:\src\!vt\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.pdb
+C:\src\!vt\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.exe
+C:\src\!vt\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.pdb
+C:\src\!vt\ExifToFileName\ExifToFileName\obj\Debug\ResolveAssemblyReference.cache
+C:\src\!vt\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmBGProcess.resources
+C:\src\!vt\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmErrorLog.resources
+C:\src\!vt\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmMain.resources
+C:\src\!vt\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.Properties.Resources.resources
+C:\src\!vt\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.UCtrlSelectPath.resources
+C:\src\!vt\ExifToFileName\ExifToFileName\obj\Debug\GenerateResource.read.1.tlog
+C:\src\!vt\ExifToFileName\ExifToFileName\obj\Debug\GenerateResource.write.1.tlog
+C:\src\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.exe.config
+C:\src\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.exe
+C:\src\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.pdb
+C:\src\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.exe
+C:\src\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.pdb
+C:\src\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.csprojResolveAssemblyReference.cache
+C:\src\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmBGProcess.resources
+C:\src\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmErrorLog.resources
+C:\src\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmMain.resources
+C:\src\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.Properties.Resources.resources
+C:\src\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.UCtrlSelectPath.resources
+C:\src\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.csproj.GenerateResource.Cache
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.exe.config
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.exe
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.pdb
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.exe
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\bin\Debug\ExifToFileName.pdb
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.csprojResolveAssemblyReference.cache
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmBGProcess.resources
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmErrorLog.resources
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.FrmMain.resources
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.Properties.Resources.resources
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.UCtrlSelectPath.resources
+C:\vt-prg\cs\ExifToFileName\ExifToFileName\obj\Debug\ExifToFileName.csproj.GenerateResource.Cache

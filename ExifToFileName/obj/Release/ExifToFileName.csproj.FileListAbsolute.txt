@@ -1,0 +1,19 @@
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.exe
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.pdb
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Release\ResolveAssemblyReference.cache
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.FrmMain.resources
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.Properties.Resources.resources
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.UCtrlSelectPath.resources
+D:\vtprg\cs\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.csproj.GenerateResource.Cache
+D:\vtprg\cs\ExifToFileName\ExifToFileName\bin\Release\ExifToFileName.exe
+D:\vtprg\cs\ExifToFileName\ExifToFileName\bin\Release\ExifToFileName.pdb
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\bin\Release\ExifToFileName.exe
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\bin\Release\ExifToFileName.pdb
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Release\ResolveAssemblyReference.cache
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.FrmMain.resources
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.Properties.Resources.resources
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.UCtrlSelectPath.resources
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.csproj.GenerateResource.Cache
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.exe
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.pdb
+C:\Users\tichy\Documents\Visual Studio 2008\Projects\ExifToFileName\ExifToFileName\obj\Release\ExifToFileName.FrmBGProcess.resources

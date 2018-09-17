@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{30C6AC81-A7A6-4FA5-A6A3-82FF9556FCA4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ExifToFileName</RootNamespace>
+    <AssemblyName>ExifToFileName</AssemblyName>
+    <ApplicationIcon>large-coral-sphere.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FileProp.cs" />
+    <Compile Include="FrmErrorLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmErrorLog.Designer.cs">
+      <DependentUpon>FrmErrorLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Checksums\Adler32.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Checksums\CRC32.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Checksums\IChecksum.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Checksums\StrangeCRC.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\FileSystemScanner.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\INameTransform.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\IScanFilter.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\NameFilter.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\PathFilter.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\StreamUtils.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\WindowsPathUtils.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Encryption\PkzipClassic.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Encryption\ZipAESStream.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Encryption\ZipAESTransform.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\SharpZipBaseException.cs" />
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Deflater.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\DeflaterConstants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\DeflaterEngine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\DeflaterHuffman.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\DeflaterPending.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Inflater.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\InflaterDynHeader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\InflaterHuffmanTree.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\PendingBuffer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Streams\DeflaterOutputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Streams\InflaterInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Streams\OutputWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Streams\StreamManipulator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\FastZip.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\IEntryFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\WindowsNameTransform.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipConstants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipEntry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipEntryFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipExtraData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipHelperStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipNameTransform.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipOutputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinkClass.cs" />
+    <Compile Include="FrmBGProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBGProcess.Designer.cs">
+      <DependentUpon>FrmBGProcess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmBGProcess.resx">
+      <DependentUpon>FrmBGProcess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmErrorLog.resx">
+      <DependentUpon>FrmErrorLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vt.UserControl\UCtrlSelectPath.resx">
+      <DependentUpon>UCtrlSelectPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="icsharpcode-SharpZipLib-c49a22d\src\ICSharpCode.SharpZLib.prjx" />
+    <None Include="Properties\DataSources\ExifDateTag.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Vt.Common\Jpeg\VtJpeg.cs" />
+    <Compile Include="Vt.Common\Jpeg\VtJpegExifConstants.cs" />
+    <Compile Include="Vt.Common\Jpeg\VtJpegExifWriter.cs" />
+    <Compile Include="Vt.Common\VtAdler32.cs" />
+    <Compile Include="Vt.Common\VtIO.cs" />
+    <Compile Include="Vt.Common\VtStrings.cs" />
+    <Compile Include="Vt.Common\VtXmlConfig.cs" />
+    <Compile Include="Vt.UserControl\UCtrlSelectPath.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vt.UserControl\UCtrlSelectPath.Designer.cs">
+      <DependentUpon>UCtrlSelectPath.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="large-coral-sphere.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
