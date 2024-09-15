@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ExifToFileName</RootNamespace>
     <AssemblyName>ExifToFileName</AssemblyName>
-    <ApplicationIcon>large-coral-sphere.ico</ApplicationIcon>
+    <ApplicationIcon>285649_camera_icon.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -144,6 +144,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="285649_camera_icon.ico" />
+    <Content Include="416367_angry_bad_birds_game_ios_icon.ico" />
+    <Content Include="9004833_image_photo_gallery_picture_icon.ico" />
     <Content Include="large-coral-sphere.ico" />
   </ItemGroup>
   <ItemGroup>

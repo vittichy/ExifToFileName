@@ -35,9 +35,12 @@
  */
 
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using Vt.JpegExifConstants;
 using Vt.XmlConfig;
+using static System.Net.Mime.MediaTypeNames;
+using XmpCore.Options;
 
 namespace ExifToFileName
 {
@@ -65,8 +68,6 @@ namespace ExifToFileName
 
     public partial class FrmMain : Form
     {
-        const string PRG_CAPTION = "Exif to filename (2014-07) v8";
-
         private ExifDateTag[] ExifDateTags = new ExifDateTag[] 
 		{
             new ExifDateTag(PropertyTagId.DateTimeOriginal, true),
@@ -78,11 +79,8 @@ namespace ExifToFileName
         public FrmMain()
         {
             InitializeComponent();
-
-            Text = PRG_CAPTION;
-
+            Text = $"{Assembly.GetExecutingAssembly().GetName().Name} {Assembly.GetExecutingAssembly().GetName().Version}";
             ReadXmlConfig();
-
             EnableActions();
         }
 
