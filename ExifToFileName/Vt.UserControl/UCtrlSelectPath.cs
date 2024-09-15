@@ -11,9 +11,7 @@ namespace ExifToFileName
     public partial class UCtrlSelectPath : UserControl
     {
         private bool _ShowNewFolderButton = false;
-        private bool _AutoSizeCaption = true;
         private Environment.SpecialFolder _RootFolder = Environment.SpecialFolder.MyComputer;
-
 
         public UCtrlSelectPath()
         {

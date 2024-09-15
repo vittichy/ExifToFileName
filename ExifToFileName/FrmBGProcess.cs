@@ -37,7 +37,7 @@ namespace ExifToFileName
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         //
-        public new DialogResult ShowDialog(IWin32Window owner, LinkClass LinkParams)
+        public DialogResult ShowDialog(IWin32Window owner, LinkClass LinkParams)
         {
             this.LinkParams = LinkParams;
             return base.ShowDialog(owner);
@@ -267,7 +267,7 @@ namespace ExifToFileName
                 }
                 loadResult = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
 

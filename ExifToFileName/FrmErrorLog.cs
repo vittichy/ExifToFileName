@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-//using System.Linq;
-using System.Text;
+﻿//using System.Linq;
 using System.Windows.Forms;
 
 namespace ExifToFileName
@@ -17,7 +11,7 @@ namespace ExifToFileName
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
-        public new DialogResult ShowDialog(IWin32Window owner, string ErrorLogText)
+        public DialogResult ShowDialog(IWin32Window owner, string ErrorLogText)
         {
             TBLog.Text = ErrorLogText;
             TBLog.Select(0, 0); // jinak je nove pridany text vyselectovany ?

@@ -409,8 +409,6 @@
         private System.Windows.Forms.Button BGo;
         private System.Windows.Forms.TextBox TBForepart;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.BindingSource exifDateTagBindingSource;
-        private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.TabPage TPLog;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox CBShowErrorLog;
