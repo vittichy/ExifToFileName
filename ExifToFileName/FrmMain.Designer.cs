@@ -159,8 +159,7 @@
 			this.ChLBExtensions.FormattingEnabled = true;
 			this.ChLBExtensions.Items.AddRange(new object[] {
             "jpg",
-            "jpeg",
-            "nar"});
+            "jpeg"});
 			this.ChLBExtensions.Location = new System.Drawing.Point(354, 66);
 			this.ChLBExtensions.Name = "ChLBExtensions";
 			this.ChLBExtensions.Size = new System.Drawing.Size(65, 64);

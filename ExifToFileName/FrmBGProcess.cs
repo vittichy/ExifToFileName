@@ -57,6 +57,8 @@ namespace ExifToFileName
         //
         private void BGWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            // TODO CheckPaths(LinkParams.SourceRoot, LinkParams.DestinationRoot);
+
             // zkratka na aktualne rozhety BGWorker
             BackgroundWorker AWorker = (sender as BackgroundWorker);
 
@@ -93,62 +95,29 @@ namespace ExifToFileName
 
             // proces nad vsemi soubory
             int i = 0;
-			int narFilesCount = 0;
             foreach (string FileName in Files)
             {
                 // prubeh procesu do pgbaru + labelu => reportuju v %
                 int Ratio = (++i * 100) / Files.Count;
-				// ted je divne, ze soubory pribyvaji ;-) ... tj dohledam NAR archivy, prictu jejich pocet k Files.Count ;-) a souboru je vice ;-) ... njn
-                AWorker.ReportProgress(Ratio, UserMsg(FileName, Files.Count + narFilesCount, PicCount + 1, NoExifCount, StartTime));
+                AWorker.ReportProgress(Ratio, UserMsg(FileName, Files.Count, PicCount + 1, NoExifCount, StartTime));
 
-				if (IsNarFile(FileName))
-				{
-					// zpracovani NAR souboru - je to zip vice fotek - rozbalim do tempu a procesuju zvlast
-					var narTempFiles = UnpackNarFilesToTemp(FileName);
+                // TODO check known filetype (JPEG, HEIC???...)
 
-					if ((narTempFiles != null) && narTempFiles.Any())
-					{
-						narFilesCount += narTempFiles.Count();
-
-						foreach (var narFile in narTempFiles)
-						{
-							// zpracovani 1.souboru normalniho Jpeg apod souboru
-							ProccessFile(
-										narFile.FullName, true,
-										LinkParams.SourceRoot,
-										LinkParams.DestinationRoot,
-										LinkParams.Forepart,
-										LinkParams.ExifKey,
-										LinkParams.NoExifKey,
-										LinkParams.DupFolder,
-										LinkParams.MoveMode,
-										LinkParams.MoveDuplicates,
-										LinkParams.CreateDayDirectory,
-										LinkParams.IgnoreSubfolder,
-										LinkParams.PreferExifDate,
-										ref PicCount, ref NoExifCount, ref PicFileNames, ref ErrorLog);
-						}
-					}
-					DeleteTempFolder(narTempFiles);
-				}
-				else
-				{
-					// zpracovani 1.souboru normalniho Jpeg apod souboru
-					ProccessFile(
-								FileName, false,
-								LinkParams.SourceRoot,
-								LinkParams.DestinationRoot,
-								LinkParams.Forepart,
-								LinkParams.ExifKey,
-								LinkParams.NoExifKey,
-								LinkParams.DupFolder,
-								LinkParams.MoveMode,
-								LinkParams.MoveDuplicates,
-								LinkParams.CreateDayDirectory,
-								LinkParams.IgnoreSubfolder,
-								LinkParams.PreferExifDate,
-								ref PicCount, ref NoExifCount, ref PicFileNames, ref ErrorLog);
-				}
+                // zpracovani 1.souboru normalniho Jpeg apod souboru
+                ProccessFile(
+                            FileName, 
+                            LinkParams.SourceRoot,
+                            LinkParams.DestinationRoot,
+                            LinkParams.Forepart,
+                            LinkParams.ExifKey,
+                            LinkParams.NoExifKey,
+                            LinkParams.DupFolder,
+                            LinkParams.MoveMode,
+                            LinkParams.MoveDuplicates,
+                            LinkParams.CreateDayDirectory,
+                            LinkParams.IgnoreSubfolder,
+                            LinkParams.PreferExifDate,
+                            ref PicCount, ref NoExifCount, ref PicFileNames, ref ErrorLog);
 
                 // nebyl zmacknut cancel ??
                 if (AWorker.CancellationPending)
@@ -159,39 +128,10 @@ namespace ExifToFileName
             }
         }
 
-
-		private void DeleteTempFolder(List<FileInfo> narTempFiles)
-		{
-			if (narTempFiles != null)
-			{
-				var firstDirecotry = narTempFiles.Select(p => p.DirectoryName).FirstOrDefault();
-				if (firstDirecotry != null)
-				{
-					Directory.Delete(firstDirecotry, true);
-				}
-			}
-		}
-
-
-		private bool IsNarFile(string FileName)
-		{
-			return (!string.IsNullOrEmpty(FileName) && FileName.ToLower().EndsWith(".nar"));
-		}
-
-
-		private List<FileInfo> UnpackNarFilesToTemp(string narFileName)
-		{
-			var tempPath = VtIO.CreateTemporaryDirectory();
-			if (tempPath.Exists)
-			{
-				var zip = new FastZip();
-				zip.ExtractZip(narFileName, tempPath.FullName, null);
-				var files = tempPath.GetFiles("*.jp*").ToList();
-				return files;
-			}
-			return null;
-		}
-
+        private void CheckPaths(string sourceRoot, string destinationRoot)
+        {
+            throw new NotImplementedException();
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // hlaseni o postupu procesu
@@ -310,9 +250,10 @@ namespace ExifToFileName
         }
 
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Process JPEG file
+        /// </summary>
         private bool ProccessFile(string SourceFileName,
-			                      bool FromNarFile,
                                   string SourceRoot,
                                   string DestRoot,
                                   string Forepart,
@@ -403,8 +344,8 @@ namespace ExifToFileName
             }
 
             // cele finalni nove filename i s cestou
-			string NewFileNameNoExt = AddSlash(NewPath) + NewFileName + (FromNarFile ? ".NAR" : string.Empty);
-            NewFileName = AddSlash(NewPath) + NewFileName + (FromNarFile ? ".NAR" : string.Empty) + Extension;
+			string NewFileNameNoExt = AddSlash(NewPath) + NewFileName;
+            NewFileName = AddSlash(NewPath) + NewFileName + Extension;
 
             if (File.Exists(NewFileName))
                 NewFileName = GenerateExtendedFileName(NewFileNameNoExt, Extension);

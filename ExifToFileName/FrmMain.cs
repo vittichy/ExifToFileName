@@ -27,6 +27,10 @@
  * 2014-07
  *  [+] podpora pro NAR soubory, coz je vlastne zip s nekolika snimky z fotaku Nokia Lumia
  *  
+ *  
+ *  2024-09
+ *  [-] vyhodit NAR - je to jn pozustatek od NOKIA telefonu
+ *  
  */
 
 using System;
@@ -201,7 +205,6 @@ namespace ExifToFileName
             CBCreateDaySubDirectory.Checked = XCfg.GetBool("CreateDaySubDirectory", true);
             ChLBExtensions.SetItemChecked(0, XCfg.GetBool("ExtensionsJPG", true));
 			ChLBExtensions.SetItemChecked(1, XCfg.GetBool("ExtensionsJPEG", true));
-			ChLBExtensions.SetItemChecked(2, XCfg.GetBool("ExtensionsNAR", true));
 			CBIgnoreSubfolder.Checked = XCfg.GetBool("IgnoreSubfolder", true);
 
             // exif list box
@@ -244,7 +247,6 @@ namespace ExifToFileName
             XCfg.SetBool("CreateDaySubDirectory", CBCreateDaySubDirectory.Checked);
             XCfg.SetBool("ExtensionsJPG", ChLBExtensions.GetItemCheckState(0) == CheckState.Checked);
 			XCfg.SetBool("ExtensionsJPEG", ChLBExtensions.GetItemCheckState(1) == CheckState.Checked);
-			XCfg.SetBool("ExtensionsNAR", ChLBExtensions.GetItemCheckState(2) == CheckState.Checked);
 			XCfg.SetListBox("PreferedExifDateTimeTag", ref LBExifDates);
             // [vt] 01-2010
             XCfg.SetBool("CBShowErrorLog", CBShowErrorLog.Checked);
