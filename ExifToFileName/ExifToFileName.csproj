@@ -72,99 +72,6 @@
     <Compile Include="FrmErrorLog.Designer.cs">
       <DependentUpon>FrmErrorLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Checksums\Adler32.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Checksums\CRC32.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Checksums\IChecksum.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Checksums\StrangeCRC.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\FileSystemScanner.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\INameTransform.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\IScanFilter.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\NameFilter.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\PathFilter.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\StreamUtils.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Core\WindowsPathUtils.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Encryption\PkzipClassic.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Encryption\ZipAESStream.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Encryption\ZipAESTransform.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\SharpZipBaseException.cs" />
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Deflater.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\DeflaterConstants.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\DeflaterEngine.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\DeflaterHuffman.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\DeflaterPending.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Inflater.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\InflaterDynHeader.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\InflaterHuffmanTree.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\PendingBuffer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Streams\DeflaterOutputStream.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Streams\InflaterInputStream.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Streams\OutputWindow.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\Compression\Streams\StreamManipulator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\FastZip.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\IEntryFactory.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\WindowsNameTransform.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipConstants.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipEntry.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipEntryFactory.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipException.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipExtraData.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipFile.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipHelperStream.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipInputStream.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipNameTransform.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="icsharpcode-SharpZipLib-c49a22d\src\Zip\ZipOutputStream.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="LinkClass.cs" />
     <Compile Include="FrmBGProcess.cs">
       <SubType>Form</SubType>
@@ -204,7 +111,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="icsharpcode-SharpZipLib-c49a22d\src\ICSharpCode.SharpZLib.prjx" />
     <None Include="Properties\DataSources\ExifDateTag.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -217,7 +123,6 @@
     </Compile>
     <Compile Include="Vt.Common\Jpeg\VtJpeg.cs" />
     <Compile Include="Vt.Common\Jpeg\VtJpegExifConstants.cs" />
-    <Compile Include="Vt.Common\Jpeg\VtJpegExifWriter.cs" />
     <Compile Include="Vt.Common\VtAdler32.cs" />
     <Compile Include="Vt.Common\VtIO.cs" />
     <Compile Include="Vt.Common\VtStrings.cs" />
