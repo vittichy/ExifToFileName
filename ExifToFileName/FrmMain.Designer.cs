@@ -38,8 +38,6 @@
             this.TBForepart = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.BGo = new System.Windows.Forms.Button();
-            this.SPDestination = new ExifToFileName.UCtrlSelectPath();
-            this.SPSource = new ExifToFileName.UCtrlSelectPath();
             this.TPAdvanced = new System.Windows.Forms.TabPage();
             this.GBVariables = new System.Windows.Forms.GroupBox();
             this.LBVariables = new System.Windows.Forms.ListBox();
@@ -49,22 +47,17 @@
             this.CBIgnoreSubfolder = new System.Windows.Forms.CheckBox();
             this.TBExifFilename = new System.Windows.Forms.TextBox();
             this.CBCreateDaySubDirectory = new System.Windows.Forms.CheckBox();
-            this.TPExifDate = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BDown = new System.Windows.Forms.Button();
-            this.BUp = new System.Windows.Forms.Button();
-            this.LBExifDates = new System.Windows.Forms.ListBox();
             this.TPLog = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.CBShowErrorLog = new System.Windows.Forms.CheckBox();
+            this.SPDestination = new ExifToFileName.UCtrlSelectPath();
+            this.SPSource = new ExifToFileName.UCtrlSelectPath();
             this.TCMain.SuspendLayout();
             this.TPFilenames.SuspendLayout();
             this.TPAdvanced.SuspendLayout();
             this.GBVariables.SuspendLayout();
             this.GBNoExif.SuspendLayout();
             this.GBExifFilenames.SuspendLayout();
-            this.TPExifDate.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.TPLog.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +69,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TCMain.Controls.Add(this.TPFilenames);
             this.TCMain.Controls.Add(this.TPAdvanced);
-            this.TCMain.Controls.Add(this.TPExifDate);
             this.TCMain.Controls.Add(this.TPLog);
             this.TCMain.Location = new System.Drawing.Point(12, 15);
             this.TCMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -178,36 +170,6 @@
             this.BGo.Text = "Go";
             this.BGo.UseVisualStyleBackColor = true;
             this.BGo.Click += new System.EventHandler(this.BGo_Click);
-            // 
-            // SPDestination
-            // 
-            this.SPDestination.Caption = "Destination";
-            this.SPDestination.CaptionTextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.SPDestination.CaptionWidth = 66;
-            this.SPDestination.Location = new System.Drawing.Point(8, 43);
-            this.SPDestination.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.SPDestination.Name = "SPDestination";
-            this.SPDestination.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            this.SPDestination.SelectedFolder = "";
-            this.SPDestination.ShowNewFolderButton = false;
-            this.SPDestination.Size = new System.Drawing.Size(796, 25);
-            this.SPDestination.TabIndex = 1;
-            this.SPDestination.OnSelectedFolderChange += new System.EventHandler(this.SPDestination_OnSelectedFolderChange);
-            // 
-            // SPSource
-            // 
-            this.SPSource.Caption = "Source";
-            this.SPSource.CaptionTextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.SPSource.CaptionWidth = 66;
-            this.SPSource.Location = new System.Drawing.Point(8, 10);
-            this.SPSource.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.SPSource.Name = "SPSource";
-            this.SPSource.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            this.SPSource.SelectedFolder = "";
-            this.SPSource.ShowNewFolderButton = false;
-            this.SPSource.Size = new System.Drawing.Size(796, 25);
-            this.SPSource.TabIndex = 0;
-            this.SPSource.OnSelectedFolderChange += new System.EventHandler(this.SPSource_OnSelectedFolderChange);
             // 
             // TPAdvanced
             // 
@@ -336,66 +298,6 @@
             this.CBCreateDaySubDirectory.Text = "Create DAY subdirectory";
             this.CBCreateDaySubDirectory.UseVisualStyleBackColor = true;
             // 
-            // TPExifDate
-            // 
-            this.TPExifDate.BackColor = System.Drawing.SystemColors.Control;
-            this.TPExifDate.Controls.Add(this.groupBox1);
-            this.TPExifDate.Location = new System.Drawing.Point(4, 25);
-            this.TPExifDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.TPExifDate.Name = "TPExifDate";
-            this.TPExifDate.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.TPExifDate.Size = new System.Drawing.Size(815, 173);
-            this.TPExifDate.TabIndex = 2;
-            this.TPExifDate.Text = "Exif date";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.BDown);
-            this.groupBox1.Controls.Add(this.BUp);
-            this.groupBox1.Controls.Add(this.LBExifDates);
-            this.groupBox1.Location = new System.Drawing.Point(8, 5);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(296, 161);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Prefered exif datetime tag";
-            // 
-            // BDown
-            // 
-            this.BDown.Location = new System.Drawing.Point(221, 126);
-            this.BDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.BDown.Name = "BDown";
-            this.BDown.Size = new System.Drawing.Size(65, 28);
-            this.BDown.TabIndex = 5;
-            this.BDown.Text = "Down";
-            this.BDown.UseVisualStyleBackColor = true;
-            this.BDown.Click += new System.EventHandler(this.BDown_Click);
-            // 
-            // BUp
-            // 
-            this.BUp.Location = new System.Drawing.Point(221, 23);
-            this.BUp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.BUp.Name = "BUp";
-            this.BUp.Size = new System.Drawing.Size(65, 28);
-            this.BUp.TabIndex = 4;
-            this.BUp.Text = "Up";
-            this.BUp.UseVisualStyleBackColor = true;
-            this.BUp.Click += new System.EventHandler(this.BUp_Click);
-            // 
-            // LBExifDates
-            // 
-            this.LBExifDates.FormattingEnabled = true;
-            this.LBExifDates.IntegralHeight = false;
-            this.LBExifDates.ItemHeight = 16;
-            this.LBExifDates.Location = new System.Drawing.Point(13, 23);
-            this.LBExifDates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.LBExifDates.Name = "LBExifDates";
-            this.LBExifDates.Size = new System.Drawing.Size(199, 130);
-            this.LBExifDates.TabIndex = 2;
-            this.LBExifDates.SelectedIndexChanged += new System.EventHandler(this.LBExifDates_SelectedIndexChanged);
-            // 
             // TPLog
             // 
             this.TPLog.BackColor = System.Drawing.SystemColors.Control;
@@ -431,6 +333,36 @@
             this.CBShowErrorLog.Text = "Show error log";
             this.CBShowErrorLog.UseVisualStyleBackColor = true;
             // 
+            // SPDestination
+            // 
+            this.SPDestination.Caption = "Destination";
+            this.SPDestination.CaptionTextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.SPDestination.CaptionWidth = 66;
+            this.SPDestination.Location = new System.Drawing.Point(8, 43);
+            this.SPDestination.Margin = new System.Windows.Forms.Padding(5);
+            this.SPDestination.Name = "SPDestination";
+            this.SPDestination.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            this.SPDestination.SelectedFolder = "";
+            this.SPDestination.ShowNewFolderButton = false;
+            this.SPDestination.Size = new System.Drawing.Size(796, 25);
+            this.SPDestination.TabIndex = 1;
+            this.SPDestination.OnSelectedFolderChange += new System.EventHandler(this.SPDestination_OnSelectedFolderChange);
+            // 
+            // SPSource
+            // 
+            this.SPSource.Caption = "Source";
+            this.SPSource.CaptionTextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.SPSource.CaptionWidth = 66;
+            this.SPSource.Location = new System.Drawing.Point(8, 10);
+            this.SPSource.Margin = new System.Windows.Forms.Padding(5);
+            this.SPSource.Name = "SPSource";
+            this.SPSource.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            this.SPSource.SelectedFolder = "";
+            this.SPSource.ShowNewFolderButton = false;
+            this.SPSource.Size = new System.Drawing.Size(796, 25);
+            this.SPSource.TabIndex = 0;
+            this.SPSource.OnSelectedFolderChange += new System.EventHandler(this.SPSource_OnSelectedFolderChange);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -453,8 +385,6 @@
             this.GBNoExif.PerformLayout();
             this.GBExifFilenames.ResumeLayout(false);
             this.GBExifFilenames.PerformLayout();
-            this.TPExifDate.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.TPLog.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -479,13 +409,8 @@
         private System.Windows.Forms.Button BGo;
         private System.Windows.Forms.TextBox TBForepart;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabPage TPExifDate;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox LBExifDates;
         private System.Windows.Forms.BindingSource exifDateTagBindingSource;
         private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.Button BDown;
-        private System.Windows.Forms.Button BUp;
         private System.Windows.Forms.TabPage TPLog;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox CBShowErrorLog;

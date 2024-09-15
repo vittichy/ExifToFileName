@@ -1,7 +1,4 @@
-﻿//using System.Linq;
-using System.Collections;
-
-namespace ExifToFileName
+﻿namespace ExifToFileName
 {
     /// <summary>
     /// Spojovaci trida pro zaslani parametru z jednoho formu do druheho
@@ -14,7 +11,6 @@ namespace ExifToFileName
         public string ExifKey;
         public string NoExifKey;
         public bool CreateDayDirectory;
-        public ArrayList PreferExifDate;
         public bool ShowErrorLog;
         public bool IgnoreSubfolder;
         public string DupFolder;
@@ -31,7 +27,6 @@ namespace ExifToFileName
                         bool MoveMode,
                         bool MoveDuplicates,
                         bool CreateDayDirectory,
-                        ArrayList PreferExifDate,
                         bool ShowErrorLog,
                         bool IgnoreSubfolder)
         {
@@ -41,7 +36,6 @@ namespace ExifToFileName
             this.ExifKey = ExifKey;
             this.NoExifKey = NoExifKey;
             this.CreateDayDirectory = CreateDayDirectory;
-            this.PreferExifDate = PreferExifDate;
             this.ShowErrorLog = ShowErrorLog;
             this.IgnoreSubfolder = IgnoreSubfolder;
             this.DupFolder = DupFolder;

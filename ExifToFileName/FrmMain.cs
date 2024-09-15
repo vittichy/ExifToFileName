@@ -35,20 +35,9 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-
-using System.Collections;
-using System.IO;
-
-using Vt.Jpeg;
 using Vt.JpegExifConstants;
 using Vt.XmlConfig;
-
 
 namespace ExifToFileName
 {
@@ -106,9 +95,6 @@ namespace ExifToFileName
                           (SPSource.SelectedFolder.Trim() != "") &
                           (TBNoExifFilename.Text.Trim() != "") &
                           (TBExifFilename.Text.Trim() != "");
-
-            BUp.Enabled   = (LBExifDates.SelectedIndex > -1) & (LBExifDates.Items.Count > 0) & (LBExifDates.SelectedIndex > 0);
-            BDown.Enabled = (LBExifDates.SelectedIndex > -1) & (LBExifDates.Items.Count > 0) & (LBExifDates.SelectedIndex < (LBExifDates.Items.Count - 1));
         }
 
         private void SPSource_OnSelectedFolderChange(object sender, EventArgs e)
@@ -148,9 +134,6 @@ namespace ExifToFileName
         // objekt pro prenos parametru do druheho formulare
         private LinkClass CreateLink()
         {
-            // seznam preferovanych exif datumu
-            ArrayList PreferExifDate = new ArrayList(LBExifDates.Items);
-
             return new LinkClass(
                             SPSource.SelectedFolder,
                             SPDestination.SelectedFolder,
@@ -161,7 +144,6 @@ namespace ExifToFileName
                             CBMoveMode.Checked,
                             CBMoveDuplicates.Checked,
                             CBCreateDaySubDirectory.Checked, 
-                            PreferExifDate,
                             CBShowErrorLog.Checked,
                             CBIgnoreSubfolder.Checked);
         }
@@ -186,15 +168,8 @@ namespace ExifToFileName
             TBNoExifFilename.Text = XCfg.GetString("NoExifFilename", TBNoExifFilename.Text);
             CBCreateDaySubDirectory.Checked = XCfg.GetBool("CreateDaySubDirectory", true);
 			CBIgnoreSubfolder.Checked = XCfg.GetBool("IgnoreSubfolder", true);
-
-            // exif list box
-            XCfg.GetListBox("PreferedExifDateTimeTag", ref LBExifDates);
-            if (LBExifDates.Items.Count <= 0) // pokud by se z XML nic nenacetlo, tak nahraju defaultni hodnoty
-                SetLBExifDateTags();
-
             // [vt] 01-2010
             CBShowErrorLog.Checked = XCfg.GetBool("CBShowErrorLog", true);
-
             // 07-2011
             TBDupSubFolder.Text = XCfg.GetString("DupSubFolder", TBDupSubFolder.Text);
             CBMoveMode.Checked = XCfg.GetBool("MoveMode", CBMoveMode.Checked);
@@ -203,17 +178,7 @@ namespace ExifToFileName
             // eventy po nahrani konfigurace
             CBMoveDuplicates_CheckedChanged(null, null);
         }
-
-
-        private void SetLBExifDateTags()
-        {
-            LBExifDates.Items.Clear();
-            LBExifDates.Items.Add(PropertyTagId.DateTimeOriginal.ToString());
-            LBExifDates.Items.Add(PropertyTagId.DateTimeDigitized.ToString());
-            LBExifDates.Items.Add(PropertyTagId.DateTime.ToString());
-            LBExifDates.SelectedIndex = 0;
-        }
-
+       
         private void SaveXmlConfig()
         {
             XmlConfig XCfg = new XmlConfig();
@@ -225,7 +190,6 @@ namespace ExifToFileName
             XCfg.SetString("ExifFilename", TBExifFilename.Text.Trim());
             XCfg.SetString("NoExifFilename", TBNoExifFilename.Text.Trim());
             XCfg.SetBool("CreateDaySubDirectory", CBCreateDaySubDirectory.Checked);
-			XCfg.SetListBox("PreferedExifDateTimeTag", ref LBExifDates);
             // [vt] 01-2010
             XCfg.SetBool("CBShowErrorLog", CBShowErrorLog.Checked);
             XCfg.SetBool("IgnoreSubfolder", CBIgnoreSubfolder.Checked);
@@ -256,22 +220,6 @@ namespace ExifToFileName
             LBox.SelectedIndex = a;
         }
 
-        private void BUp_Click(object sender, EventArgs e)
-        {
-            if ((LBExifDates.SelectedIndex > -1) & (LBExifDates.SelectedIndex > 0))
-            {
-                SwapItems(ref LBExifDates, LBExifDates.SelectedIndex - 1, LBExifDates.SelectedIndex);
-            }
-        }
-
-        private void BDown_Click(object sender, EventArgs e)
-        {
-            if ((LBExifDates.SelectedIndex > -1) & (LBExifDates.SelectedIndex < (LBExifDates.Items.Count - 1)))
-            {
-                SwapItems(ref LBExifDates, LBExifDates.SelectedIndex + 1, LBExifDates.SelectedIndex);
-            }
-        }
-
         private void LBVariables_MouseDown(object sender, MouseEventArgs e)
         {
             int IndexOfItem = LBVariables.IndexFromPoint(e.X, e.Y);
@@ -282,7 +230,6 @@ namespace ExifToFileName
                 LBVariables.DoDragDrop(LBVariables.Items[IndexOfItem], DragDropEffects.Copy);
             }
         }
-
         private void TBExifFilename_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Text))

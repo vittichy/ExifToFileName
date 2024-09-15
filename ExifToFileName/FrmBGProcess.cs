@@ -1,13 +1,17 @@
-﻿using System;
+﻿using MetadataExtractor;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Schema;
 using Vt.Common;
 using Vt.Jpeg;
 using Vt.JpegExifConstants;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 
 namespace ExifToFileName
@@ -25,11 +29,6 @@ namespace ExifToFileName
         /// Vyhledavani duplicit
         /// </summary>
         List<FileProp> CRCList = new List<FileProp>();
-
-        /// <summary>
-        /// Seznam typu souboru, ktere budu zpracovavat
-        /// </summary>
-        public static readonly string[] FileExtensions = { "jpg", "jpeg" /* TODO heif, heic? */ };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         public FrmBGProcess()
@@ -83,7 +82,7 @@ namespace ExifToFileName
 
 			// seznam adresaru, koncicich mezerami ... ty .net neumi zpracovat :-/ otrimuje je a pak hlasi, ze neexistuji :-)
 			var ErrorPaths = new List<string>();
-            ArrayList Files = GetAllSubFiles(LinkParams.SourceRoot, ref ErrorPaths);
+            var Files = VtIO.GetAllFilesEx(LinkParams.SourceRoot, "*.*", ref ErrorPaths); 
 			if (ErrorPaths.Count > 0)
 			{
 				foreach (string err in ErrorPaths)
@@ -122,7 +121,6 @@ namespace ExifToFileName
                             LinkParams.MoveDuplicates,
                             LinkParams.CreateDayDirectory,
                             LinkParams.IgnoreSubfolder,
-                            LinkParams.PreferExifDate,
                             ref PicCount, ref NoExifCount, ref PicFileNames, ref ErrorLog);
 
                 // nebyl zmacknut cancel ??
@@ -230,32 +228,6 @@ namespace ExifToFileName
             return Hours + ":" + Minutes + ":" + Seconds;
         }
 
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //
-        // fce z puvodniho FrmMain, kdyz zde nebyl bgworker
-        //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-		private ArrayList GetAllSubFiles(string RootPath, ref List<string> ErrorPaths)
-        {
-            ArrayList Result = new ArrayList();
-
-            // projedu vsechny typy souboru
-            for (int i = 0; i < FileExtensions.Count(); i++)
-            {
-                string SearchPattern = "*." + FileExtensions[i];
-                var Files = VtIO.GetAllFilesEx(RootPath, SearchPattern, ref ErrorPaths);
-                foreach (string FileName in Files)
-                    Result.Add(FileName);
-            }
-            return Result;
-        }
-
-
         /// <summary>
         /// Process JPEG file
         /// </summary>
@@ -270,56 +242,38 @@ namespace ExifToFileName
                                   bool MoveDuplicate,
                                   bool CBCreateDaySubDirectoryChecked,
                                   bool IgnoreSubfolder,
-                                  ArrayList PreferExifDate,
                                   ref int PicCount,
                                   ref int NoExifCount,
                                   ref ArrayList PicFileNames,
                                   ref string ErrorLog)
         {
-            DateTime ExifDate = DateTime.MinValue;
+            bool loadResult = false; // zda se povedl nacist soubor
             string NewFileName = "";
-
-            bool ExifExist = false;
-            bool LoadResult = false; // zda se povedl nacist JPEG soubor
 
             // kvuli duplicitam
             FileProp fp = new FileProp(SourceFileName);
 
-            //using( 
-            Jpeg VtJpeg = new Jpeg();
+            DateTime? exifDateTime = null;
+            string exifEquip;
+            try
             {
-                // zkusim nahrat jpeg soubor
-                Exception LoadEx = null;
-                LoadResult = VtJpeg.LoadFromFile(SourceFileName, out LoadEx);
-                if (LoadResult)
-                {
-                    // nahrani se povedlo - jeste juknu na CRC (pres adlera)
-                    //fp.CRC = Vt.Adler32.FileChecksum(SourceFileName);
-                    fp.FileSize = new FileInfo(SourceFileName).Length; // az bude cas mohlo by se udelat, ze CRC se bude pocitat jen u stejne velkych souboru - tim by se to melo dost uruchlit
-                    fp.DupCount = FileIsDuplicate(fp);
+                var exif = GetExifDateTime(SourceFileName);
+                exifDateTime = exif.digitized;
+                exifEquip = exif.equip;
 
-                    // obsahuje exif informaci o datumu
-                    ExifExist = ExistAnyDateTimeExifTag(ref VtJpeg);
-                    if (ExifExist)
-                    {
-                        ExifDate = GetPreferedDateTime(ref VtJpeg, PreferExifDate);
-                        string ExifEquip = GetEquip(ref VtJpeg);
-                        NewFileName = MakeExifFileName(ExifKey, Forepart, ExifDate, PicCount, NoExifCount, ExifEquip, fp.DupCount);
-                    }
-                    else
-                    {
-                        NewFileName = MakeExifFileName(NoExifKey, Forepart, ExifDate, PicCount, NoExifCount, "", fp.DupCount);
-                    }
-                }
-                else                
+                if (exifDateTime.HasValue)
                 {
-                    NewFileName = Path.GetFileName(SourceFileName);
-                    AddErrorLog(ref ErrorLog, SourceFileName, LoadEx);
+                    NewFileName = MakeExifFileName(ExifKey, Forepart, exifDateTime.Value, PicCount, NoExifCount, exifEquip, fp.DupCount);
                 }
+                else
+                {
+                    NewFileName = MakeExifFileName(NoExifKey, Forepart, DateTime.MinValue, PicCount, NoExifCount, "", fp.DupCount);
+                }
+                loadResult = true;
             }
-
-            if (LoadResult)
-                VtJpeg.Dispose();
+            catch (Exception ex)
+            {
+            }
 
             // koncovka (obsahuje i tecku !)
             string Extension = Path.GetExtension(SourceFileName);
@@ -345,7 +299,7 @@ namespace ExifToFileName
             // tvorit sub-adresare dle jednotlivych dni ??
             if (CBCreateDaySubDirectoryChecked)
             {
-                string DaySubDir = MakeDaySubDirName(ExifDate, LoadResult, DupFolder, fp.DupCount);
+                string DaySubDir = MakeDaySubDirName(exifDateTime.HasValue ? exifDateTime.Value : DateTime.MinValue, loadResult, DupFolder, fp.DupCount);
                 NewPath = AddSlash(NewPath + DaySubDir);
             }
 
@@ -362,7 +316,7 @@ namespace ExifToFileName
                 CopyFile(SourceFileName, NewFileName, NewPath, MoveMode);
             }
             PicCount++;
-			if (!ExifExist)
+			if (!exifDateTime.HasValue)
 			{
 				NoExifCount++;
 			}
@@ -373,78 +327,37 @@ namespace ExifToFileName
             CRCList.Add(fp);
 
             // posilam zpet vysledek nacteni souboru
-            return LoadResult;
+            return loadResult;
         }
 
-
-        private bool ExistAnyDateTimeExifTag(ref Jpeg VtJpeg)
+        private (DateTime? digitized, string equip) GetExifDateTime(string fileName)
         {
-            bool ExifDateTime = VtJpeg.ExistPropertyItem(PropertyTagId.DateTime);
-            bool ExifDateTimeDigitized = VtJpeg.ExistPropertyItem(PropertyTagId.DateTimeDigitized);
-            bool ExifDateTimeOriginal = VtJpeg.ExistPropertyItem(PropertyTagId.DateTimeOriginal);
-            return ExifDateTime | ExifDateTimeDigitized | ExifDateTimeOriginal;
-        }
+            var exif = ImageMetadataReader.ReadMetadata(fileName);
+            if (exif == null) return (null, null);
 
+            var exifTags = exif.SelectMany(p => p.Tags)
+                                    .Where(p => p.DirectoryName == "Exif SubIFD"
+                                             || p.DirectoryName == "Exif IFD0")
+                                        .ToList();
+            // 2024:08:15 12:40:04
+            var digitizedTag = GetTagDescription(exifTags, "Date/Time Digitized");
+            var digitized = DateTime.TryParseExact(digitizedTag, "yyyy:MM:dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : (DateTime?)null;
 
-        private PropertyTagId GetPIdFromStr(string s)
-        {
-            if (s == PropertyTagId.EquipMake.ToString())
-                return PropertyTagId.EquipMake;
-            else if (s == PropertyTagId.EquipModel.ToString())
-                return PropertyTagId.EquipModel;
-            else if (s == PropertyTagId.DateTimeOriginal.ToString())
-                return PropertyTagId.DateTimeOriginal;
-            else if (s == PropertyTagId.DateTimeDigitized.ToString())
-                return PropertyTagId.DateTimeDigitized;
-            else
-                return PropertyTagId.DateTime;
-        }
+            // TODO MP4 ?
+            // "st led 31 20:02:14 +01:00 2024"
+            // QuickTime Track Header
 
-        private DateTime GetPreferedDateTime(ref Jpeg VtJpeg, ArrayList PreferExifDate)
-        {
-            DateTime Result = DateTime.MinValue;
+            var model = GetTagDescription(exifTags, "Model");
+            var make = GetTagDescription(exifTags, "Make");
+            var equip = $"{make?.Trim()} {model?.Trim()}".Trim();
 
-            //foreach (string Item in LBExifDates.Items)
-            //{
-            //    PropertyTagId PTagId = GetPIdFromStr(Item);
-            //    if (VtJpeg.ExistPropertyItem(PTagId))
-            //        return VtJpeg.GetPropertyItemAsDateTime(PTagId);
-            //}
-            foreach (string Item in PreferExifDate)
+            return (digitized, equip);
+
+            string GetTagDescription(List<Tag> exifTagSet, string tagName)
             {
-                PropertyTagId PTagId = GetPIdFromStr(Item);
-                if (VtJpeg.ExistPropertyItem(PTagId))
-                    return VtJpeg.GetPropertyItemAsDateTime(PTagId);
+                return exifTagSet?.FirstOrDefault(p => p.Name == tagName)?.Description;
             }
-            return Result;
         }
-
-        private string GetExifString(ref Jpeg VtJpeg, string Key)
-        {
-            PropertyTagId PTagId = GetPIdFromStr(Key);
-            if (VtJpeg.ExistPropertyItem(PTagId))
-                return VtJpeg.GetPropertyItemAsString(PTagId);
-            else 
-                return "";
-        }
-
-        //EquipMake
-        //EquipModel	
-        private string GetEquip(ref Jpeg VtJpeg)
-        {
-            string Result = "";
-            string EquipMake  = GetExifString(ref VtJpeg, "EquipMake");
-            string EquipModel = GetExifString(ref VtJpeg, "EquipModel");
-
-            // sectu to, pokud existuji oba retezce, oddelim je mezerou
-            Result = EquipMake;
-            if (!string.IsNullOrEmpty(EquipMake) && !string.IsNullOrEmpty(EquipModel))
-                Result += " ";
-            Result += EquipModel;
-
-            return Result;
-        }
-
 
         private string GenerateExtendedFileName(string FileName, string Extension)
         {
@@ -458,7 +371,6 @@ namespace ExifToFileName
             while (File.Exists(Result));
             return Result;
         }
-
 
         private string MakeExifFileName(string Key, string Forepart, DateTime Date, int PicNumber, int NoExifNumber, string Equip, int Duplicates) 
         {
@@ -591,7 +503,7 @@ namespace ExifToFileName
             else
             {
                 // soubor neexistuje, tak musim predpripravit cesty, ktere nemusi existovat
-                Directory.CreateDirectory(NewPath);
+                System.IO.Directory.CreateDirectory(NewPath);
             }
 
             if (MoveMode)
