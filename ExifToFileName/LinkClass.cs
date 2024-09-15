@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-//using System.Linq;
-using System.Text;
+﻿//using System.Linq;
 using System.Collections;
 
 namespace ExifToFileName
 {
-    // spojovaci trida pro zaslani parametru z jednoho formu do druheho
-
+    /// <summary>
+    /// Spojovaci trida pro zaslani parametru z jednoho formu do druheho
+    /// </summary>
     public class LinkClass
     {
         public string DestinationRoot;
@@ -15,7 +13,6 @@ namespace ExifToFileName
         public string Forepart;
         public string ExifKey;
         public string NoExifKey;
-        public ArrayList SelectedExt;
         public bool CreateDayDirectory;
         public ArrayList PreferExifDate;
         public bool ShowErrorLog;
@@ -23,10 +20,6 @@ namespace ExifToFileName
         public string DupFolder;
         public bool MoveMode;
         public bool MoveDuplicates;
-
-        //public int PicCount;
-        //public int NoExifCount;
-        //public ArrayList PicFileNames;
 
         public LinkClass(
                         string SourceRoot,
@@ -37,7 +30,6 @@ namespace ExifToFileName
                         string DupFolder,   
                         bool MoveMode,
                         bool MoveDuplicates,
-                        ArrayList SelectedExt,
                         bool CreateDayDirectory,
                         ArrayList PreferExifDate,
                         bool ShowErrorLog,
@@ -48,7 +40,6 @@ namespace ExifToFileName
             this.Forepart = Forepart;
             this.ExifKey = ExifKey;
             this.NoExifKey = NoExifKey;
-            this.SelectedExt = SelectedExt;
             this.CreateDayDirectory = CreateDayDirectory;
             this.PreferExifDate = PreferExifDate;
             this.ShowErrorLog = ShowErrorLog;

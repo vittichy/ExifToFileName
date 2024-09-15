@@ -1,17 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Collections;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using Vt.Common;
 using Vt.Jpeg;
 using Vt.JpegExifConstants;
-using ICSharpCode.SharpZipLib.Zip;
-using Vt.Common;
 
 
 namespace ExifToFileName
@@ -19,11 +15,21 @@ namespace ExifToFileName
     public partial class FrmBGProcess : Form
     {
         private LinkClass LinkParams;
-        // 01-2010 - seznam chyb pri nacitani JPEGu
+        
+        /// <summary>
+        /// Seznam chyb pri nacitani JPEGu
+        /// </summary>
         private string ErrorLog = "";
-        // 2011 - vyhledavani duplicit
+        
+        /// <summary>
+        /// Vyhledavani duplicit
+        /// </summary>
         List<FileProp> CRCList = new List<FileProp>();
 
+        /// <summary>
+        /// Seznam typu souboru, ktere budu zpracovavat
+        /// </summary>
+        public static readonly string[] FileExtensions = { "jpg", "jpeg" /* TODO heif, heic? */ };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         public FrmBGProcess()
@@ -77,7 +83,7 @@ namespace ExifToFileName
 
 			// seznam adresaru, koncicich mezerami ... ty .net neumi zpracovat :-/ otrimuje je a pak hlasi, ze neexistuji :-)
 			var ErrorPaths = new List<string>();
-            ArrayList Files = GetAllSubFiles(LinkParams.SourceRoot, LinkParams.SelectedExt, ref ErrorPaths);
+            ArrayList Files = GetAllSubFiles(LinkParams.SourceRoot, ref ErrorPaths);
 			if (ErrorPaths.Count > 0)
 			{
 				foreach (string err in ErrorPaths)
@@ -234,14 +240,14 @@ namespace ExifToFileName
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-		private ArrayList GetAllSubFiles(string RootPath, ArrayList ExtList, ref List<string> ErrorPaths)
+		private ArrayList GetAllSubFiles(string RootPath, ref List<string> ErrorPaths)
         {
             ArrayList Result = new ArrayList();
 
-            // projedu vsechny zatrzene extenze
-            for (int i = 0; i < ExtList.Count; i++)
+            // projedu vsechny typy souboru
+            for (int i = 0; i < FileExtensions.Count(); i++)
             {
-                string SearchPattern = "*." + ExtList[i];
+                string SearchPattern = "*." + FileExtensions[i];
                 var Files = VtIO.GetAllFilesEx(RootPath, SearchPattern, ref ErrorPaths);
                 foreach (string FileName in Files)
                     Result.Add(FileName);

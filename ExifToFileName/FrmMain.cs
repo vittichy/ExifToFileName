@@ -29,7 +29,8 @@
  *  
  *  
  *  2024-09
- *  [-] vyhodit NAR - je to jn pozustatek od NOKIA telefonu
+ *  [-] vyhodit NAR - je to jen pozustatek od NOKIA telefonu
+ *      - budu nacitat jen podporovane typy souboru, ostatni do unknown (TODO co videa?)
  *  
  */
 
@@ -97,24 +98,14 @@ namespace ExifToFileName
         }
 
 
-        private bool AnyItemIsChecked(CheckedListBox ChLBox)
-        {
-            for (int i = 0; i < ChLBox.Items.Count; i++)
-            {
-                if (ChLBExtensions.GetItemCheckState(i) == CheckState.Checked)
-                    return true;
-            }
-            return false;
-        }
-
-
         private void EnableActions()
         {
+            // TODO folder exists?
+
             BGo.Enabled = (SPDestination.SelectedFolder.Trim() != "") &
                           (SPSource.SelectedFolder.Trim() != "") &
                           (TBNoExifFilename.Text.Trim() != "") &
-                          (TBExifFilename.Text.Trim() != "") &
-                          AnyItemIsChecked(ChLBExtensions);
+                          (TBExifFilename.Text.Trim() != "");
 
             BUp.Enabled   = (LBExifDates.SelectedIndex > -1) & (LBExifDates.Items.Count > 0) & (LBExifDates.SelectedIndex > 0);
             BDown.Enabled = (LBExifDates.SelectedIndex > -1) & (LBExifDates.Items.Count > 0) & (LBExifDates.SelectedIndex < (LBExifDates.Items.Count - 1));
@@ -157,14 +148,6 @@ namespace ExifToFileName
         // objekt pro prenos parametru do druheho formulare
         private LinkClass CreateLink()
         {
-            // seznam vybranych pripon souboru
-            ArrayList SelectedExt = new ArrayList();
-            for (int i = 0; i < ChLBExtensions.Items.Count; i++)
-            {
-                if (ChLBExtensions.GetItemCheckState(i) == CheckState.Checked)
-                    SelectedExt.Add(ChLBExtensions.Items[i].ToString());
-            }
-
             // seznam preferovanych exif datumu
             ArrayList PreferExifDate = new ArrayList(LBExifDates.Items);
 
@@ -177,7 +160,6 @@ namespace ExifToFileName
                             TBDupSubFolder.Text.Trim(),
                             CBMoveMode.Checked,
                             CBMoveDuplicates.Checked,
-                            SelectedExt, 
                             CBCreateDaySubDirectory.Checked, 
                             PreferExifDate,
                             CBShowErrorLog.Checked,
@@ -203,8 +185,6 @@ namespace ExifToFileName
             TBExifFilename.Text = XCfg.GetString("ExifFilename", TBExifFilename.Text);
             TBNoExifFilename.Text = XCfg.GetString("NoExifFilename", TBNoExifFilename.Text);
             CBCreateDaySubDirectory.Checked = XCfg.GetBool("CreateDaySubDirectory", true);
-            ChLBExtensions.SetItemChecked(0, XCfg.GetBool("ExtensionsJPG", true));
-			ChLBExtensions.SetItemChecked(1, XCfg.GetBool("ExtensionsJPEG", true));
 			CBIgnoreSubfolder.Checked = XCfg.GetBool("IgnoreSubfolder", true);
 
             // exif list box
@@ -245,8 +225,6 @@ namespace ExifToFileName
             XCfg.SetString("ExifFilename", TBExifFilename.Text.Trim());
             XCfg.SetString("NoExifFilename", TBNoExifFilename.Text.Trim());
             XCfg.SetBool("CreateDaySubDirectory", CBCreateDaySubDirectory.Checked);
-            XCfg.SetBool("ExtensionsJPG", ChLBExtensions.GetItemCheckState(0) == CheckState.Checked);
-			XCfg.SetBool("ExtensionsJPEG", ChLBExtensions.GetItemCheckState(1) == CheckState.Checked);
 			XCfg.SetListBox("PreferedExifDateTimeTag", ref LBExifDates);
             // [vt] 01-2010
             XCfg.SetBool("CBShowErrorLog", CBShowErrorLog.Checked);
