@@ -7,11 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Schema;
 using Vt.Common;
-using Vt.Jpeg;
-using Vt.JpegExifConstants;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 
 namespace ExifToFileName
@@ -229,7 +225,7 @@ namespace ExifToFileName
         }
 
         /// <summary>
-        /// Process JPEG file
+        /// Process file
         /// </summary>
         private bool ProccessFile(string SourceFileName,
                                   string SourceRoot,
@@ -253,17 +249,17 @@ namespace ExifToFileName
             // kvuli duplicitam
             FileProp fp = new FileProp(SourceFileName);
 
-            DateTime? exifDateTime = null;
+            DateTime? exifDate = null;
             string exifEquip;
             try
             {
                 var exif = GetExifDateTime(SourceFileName);
-                exifDateTime = exif.digitized;
+                exifDate = exif.date;
                 exifEquip = exif.equip;
 
-                if (exifDateTime.HasValue)
+                if (exifDate.HasValue)
                 {
-                    NewFileName = MakeExifFileName(ExifKey, Forepart, exifDateTime.Value, PicCount, NoExifCount, exifEquip, fp.DupCount);
+                    NewFileName = MakeExifFileName(ExifKey, Forepart, exifDate.Value, PicCount, NoExifCount, exifEquip, fp.DupCount);
                 }
                 else
                 {
@@ -299,7 +295,7 @@ namespace ExifToFileName
             // tvorit sub-adresare dle jednotlivych dni ??
             if (CBCreateDaySubDirectoryChecked)
             {
-                string DaySubDir = MakeDaySubDirName(exifDateTime.HasValue ? exifDateTime.Value : DateTime.MinValue, loadResult, DupFolder, fp.DupCount);
+                string DaySubDir = MakeDaySubDirName(exifDate.HasValue ? exifDate.Value : DateTime.MinValue, loadResult, DupFolder, fp.DupCount);
                 NewPath = AddSlash(NewPath + DaySubDir);
             }
 
@@ -316,7 +312,7 @@ namespace ExifToFileName
                 CopyFile(SourceFileName, NewFileName, NewPath, MoveMode);
             }
             PicCount++;
-			if (!exifDateTime.HasValue)
+			if (!exifDate.HasValue)
 			{
 				NoExifCount++;
 			}
@@ -330,33 +326,69 @@ namespace ExifToFileName
             return loadResult;
         }
 
-        private (DateTime? digitized, string equip) GetExifDateTime(string fileName)
+        private (DateTime? date, string equip) GetExifDateTime(string fileName)
         {
             var exif = ImageMetadataReader.ReadMetadata(fileName);
             if (exif == null) return (null, null);
 
             var exifTags = exif.SelectMany(p => p.Tags)
                                     .Where(p => p.DirectoryName == "Exif SubIFD"
-                                             || p.DirectoryName == "Exif IFD0")
+                                             || p.DirectoryName == "Exif IFD0"
+                                             || p.DirectoryName == "QuickTime Track Header")
                                         .ToList();
             // 2024:08:15 12:40:04
             var digitizedTag = GetTagDescription(exifTags, "Date/Time Digitized");
-            var digitized = DateTime.TryParseExact(digitizedTag, "yyyy:MM:dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : (DateTime?)null;
+            var date = DateTime.TryParseExact(digitizedTag, "yyyy:MM:dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : (DateTime?)null;
 
-            // TODO MP4 ?
-            // "st led 31 20:02:14 +01:00 2024"
-            // QuickTime Track Header
+            if (!date.HasValue)
+            {
+                // zkusim rozparsovat divny format z quick time tagu
+                // "st led 31 20:02:14 2024"
+                var mp4DateTag = GetTagDescription(exifTags, "Created");
+                // precod na parsovatelnejsi format
+                var quickTime = QuickTimeHeaderTag(mp4DateTag);
+                //"MM dd HH:mm:ss yyyy"
+                date = DateTime.TryParseExact(quickTime,
+                                                   "MM dd HH:mm:ss yyyy",
+                                                   CultureInfo.InvariantCulture,
+                                                   DateTimeStyles.None,
+                                                   out result) ? result : (DateTime?)null;
+            }
 
             var model = GetTagDescription(exifTags, "Model");
             var make = GetTagDescription(exifTags, "Make");
             var equip = $"{make?.Trim()} {model?.Trim()}".Trim();
-
-            return (digitized, equip);
+            return (date, equip);
 
             string GetTagDescription(List<Tag> exifTagSet, string tagName)
             {
                 return exifTagSet?.FirstOrDefault(p => p.Name == tagName)?.Description;
             }
+        }
+
+        /// <summary>
+        /// Pokus o odstraneni ceskych divnosti z quicktime datoveho tagu
+        /// </summary>
+        private string QuickTimeHeaderTag(string source)
+        {
+            if (string.IsNullOrWhiteSpace(source) || source.Length < 4) return null;
+
+            // "st led 31 20:02:14 2024"
+            string[] czMohth = { "led", "úno", "bře", "dub", "kvě", "čvn", "čvc", "srp", "zář", "říj", "lis", "pro" };
+            
+            // vyhodit den v tydnu
+            var result = source.Substring(3);
+
+            // nahradit ceskou zkratku mesice za index ... led => 01
+            for (int i = 0; i < czMohth.Length; i++)
+            {
+                if (result.Contains(czMohth[i]))
+                {
+                    result = result.Replace(czMohth[i], $"{i + 1:D2}");
+                    break;
+                }
+            }
+            return result;
         }
 
         private string GenerateExtendedFileName(string FileName, string Extension)
@@ -472,7 +504,7 @@ namespace ExifToFileName
             {
                 if (Result[Result.Length - 1] != '\\')
                 {
-                    Result += @"\";
+                    Result += '\\';
                 }
             }
             return Result;
